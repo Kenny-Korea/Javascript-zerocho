@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>셀프 채팅 만들기</title>
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: antiquewhite;
+            width: 300px;
+            height: 600px;
+        }
+
+        .messageArea {
+            background-color: blue;
+            width: 94%;
+            height: 80%;
+            margin: 3%;
+        }
+
+        .buttonArea {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            width: 94%;
+            height: 14%;
+            margin: 3%;
+        }
+
+        input {
+            width: 80%;
+            height: 80%;
+            margin-right: 1%;
+        }
+
+        .message {
+            display: flex;
+            background-color: cyan;
+            width: 96%;
+            height: 40px;
+            margin: 2%;
+        }
+
+        .left {
+            justify-content: flex-start;
+        }
+
+        .right {
+            justify-content: flex-end;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <main>
+        <!-- html 영역 -->
+        <div class="messageArea">
+            <div class="message left"></div>
+            <div class="message right"></div>
+
+        </div>
+
+        <div class="buttonArea">
+            <form action="">
+                <input type="text">
+                <button>전송</button>
+            </form>
+
+        </div>
+
+        <!-- javascript 영역 -->
+        <script>
+            let user = true // true: 나(rigit), false: 너(left)
+
+            const $input = document.querySelector('input')
+            const $button = document.querySelector('button')
+            const $message = document.querySelectorAll('.message')
+
+            $button.addEventListener('submit', () => {})
+
+            
+
+        </script>
+    </main>
+</body>
+</html>

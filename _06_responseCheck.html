@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응속도 체크하기</title>
+    <style>
+      #screen {
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        user-select: none;
+      }
+      #screen.waiting {
+        background-color: aqua;
+      }
+      #screen.ready {
+        background-color: red;
+        color: white;
+      }
+      #screen.now {
+        background-color: greenyellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen" class="waiting">클릭해서 시작하세요</div>
+    <div id="result"></div>
+    <div id="date"></div>
+    <script>
+      const $screen = document.querySelector("#screen");
+      const $result = document.querySelector("#result");
+
+      let diff = 0;
+      let startTime;
+      let endTime;
+      let count = 0;
+      const array = [];
+      let timeoutId;
+
+      $screen.addEventListener("click", (e) => {
+        if (count < 10) {
+          if (e.target.classList.contains("waiting")) {
+            e.target.textContent = "초록색 화면으로 바뀌면 클릭하세요 ";
+            e.target.classList.remove("waiting");
+            e.target.classList.add("ready");
+            timeoutId = setTimeout(() => {
+              startTime = new Date();
+              e.target.classList.add("now");
+              e.target.classList.remove("ready");
+              e.target.textContent = "클릭하세요!!";
+            }, parseInt(Math.random() * 2000) + 1000);
+          } else if (e.target.classList.contains("ready")) {
+            console.log("지금 누르시면 안됩니다 ㅠㅠ");
+            e.target.classList.remove("ready");
+            e.target.classList.add("waiting");
+            clearTimeout(timeoutId);
+          } else if (e.target.classList.contains("now")) {
+            endTime = new Date();
+            let diff = endTime - startTime;
+            // 초기화 해줄 필요는 없으나, 혹시 모를 에러를 대비하여 초기화 해주는 습관을 들이는 것이 좋음
+            startTime = null;
+            endTime = null;
+            array.push(diff);
+            const average = array.reduce((a, b) => a + b) / array.length / 1000;
+            count++;
+            e.target.textContent = `반응속도: ${
+              diff / 1000
+            }초, 평균: ${average}초
+            ${array
+              .sort((a, b) => b - a)
+              .slice(0, 5)
+              .forEach((a) => {
+                console.log(a);
+              })}
+            클릭해서 다시 시작하세요`;
+            e.target.classList.remove("now");
+            e.target.classList.add("waiting");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

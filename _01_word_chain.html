@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>끝말잇기</title>
+  </head>
+
+  <body>
+    <div><span id="order">1</span></div>
+    <div>제시어: <span id="word"></span></div>
+    <input type="text" />
+    <button>입력</button>
+    <script>
+      const number = Number(prompt("몇 명이 참가하나요?")); // Number는 현재 참여한 플레이어 숫자를 담는 객체
+      const $button = document.querySelector("button");
+      const $input = document.querySelector("input");
+      const $word = document.querySelector("#word");
+      const $order = document.querySelector("#order");
+
+      let word; // 제시어
+      let newWord; // 새로 입력한 단어
+
+      // const pressEnter = (event) => {
+      //     if($input.onkeypress == 27){
+      //         document.write('enter')
+      //     }
+      // }
+
+      const onClickButton = () => {
+        if (!word) {
+          // 제시어가 비어 있는가?
+          // 비어 있음
+          console.log("empty");
+          word = newWord; // 입력한 단어가 제시어가 된다(제시어 바꿈)
+          $word.textContent = word; // 출력 화면 바꿔주는 코드
+          $input.value = "";
+          $input.focus; // input창에 깜빡이는 커서 넣기
+          const order = Number($order.textContent);
+          if (order + 1 > number) {
+            $order.textContent = 1; // 자동 형변환되어 string이 됨
+          } else {
+            $order.textContent = order + 1;
+          }
+        } else {
+          // 비어 있지 않음
+          if (word[word.length - 1] === newWord[0]) {
+            word = newWord; // 입력한 단어가 제시어가 된다(제시어 바꿈)
+            $word.textContent = word; // 출력 화면 바꿔주는 코드
+            $input.value = "";
+            $input.focus; // input창에 깜빡이는 커서 넣기
+            const order = Number($order.textContent);
+            if (order + 1 > number) {
+              $order.textContent = 1; // 자동 형변환되어 string이 됨
+            } else {
+              $order.textContent = order + 1;
+            }
+          } else {
+            alert("틀렸습니다");
+            console.log(newWord);
+          }
+        }
+      };
+
+      const onInput = (event) => {
+        newWord = event.target.value;
+      };
+
+      $button.addEventListener("click", onClickButton); // 버튼에 이벤트를 저장 --> 클릭하면 onClickButton 호출
+      $input.addEventListener("input", onInput); // input에 이벤트를 저장 --> 내용 입력하면 onInput 호출
+    </script>
+  </body>
+</html>

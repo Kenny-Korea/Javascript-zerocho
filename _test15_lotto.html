@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로또 3등 당첨될 때까지 얼마나 걸리는지 확인</title>
+  </head>
+  <body>
+    <script>
+      // 45개 공 생성
+      const check = (e) => {
+        console.log(e);
+      };
+      const balls = Array(45)
+        .fill()
+        .map((a, i) => i + 1);
+      console.log(balls);
+      const box = [];
+
+      // 6개 공 뽑기(피셔-에이츠 방식)
+      while (balls.length > 0) {
+        box.push(balls.splice(parseInt(Math.random() * balls.length), 1)[0]);
+      }
+
+      const sixNums = box.slice(0, 6).sort((a, b) => a - b);
+      const myNums = box.slice(0, 6).sort((a, b) => a - b);
+      check(sixNums);
+
+      const point = 0;
+
+      for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 6; j++) {
+          if (sixNums[j] === myNums[i]) {
+            point++;
+          }
+        }
+      }
+      if (point > 5) {
+        check("6개 번호를 맞췄습니다!");
+      } else if (point > 4) {
+        check("5개 번호를 맞췄습니다!");
+      } else if (point > 3) {
+        check("4개 번호를 맞췄습니다!");
+      } else if (point > 2) {
+        check("3개 번호를 맞췄습니다!");
+      } else if (point > 1) {
+        check("2개 번호를 맞췄습니다!");
+      } else if (point > 0) {
+        check("1개 번호를 맞췄습니다!");
+      } else if ((point = 0)) {
+        check("꽝입니다.");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            width: 500px;
+            height: 500px;
+        }
+
+        div {
+            width: 48px;
+            height: 48px;
+            background-color: antiquewhite;
+            border: 1px solid gray;
+            user-select: none;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+
+    </main>
+
+    <script>
+        const $main = document.querySelector('main')
+        let $div = document.querySelectorAll('div')
+
+
+        for (let i = 0; i < 100; i++) {
+            $main.append(document.createElement('div'))
+            $div = document.querySelectorAll('div')
+            $div[$div.length - 1].textContent = $div.length
+        }
+        
+        // 아래처럼 하면 css에 hover값 준거랑 똑같음;;
+
+        const onMouseover = (event) => {
+            console.log(event.target)
+            event.target.style.backgroundColor="black" // .css는 jQuery 속성임 ㅠㅠ
+            // let index = event.target.textContent
+            // console.log(index)
+        }
+
+        const onMouseout = (event) => {
+            event.target.style.backgroundColor="antiquewhite" // .css는 jQuery 속성임 ㅠㅠ
+            // let index = event.target.textContent
+            // console.log(index)
+        }
+        for (let i = 0; i < 100; i++){
+            $div[i].addEventListener('mouseover', onMouseover)
+            $div[i].addEventListener('mouseout', onMouseout)
+
+        }
+
+    </script>
+</body>
+</html>

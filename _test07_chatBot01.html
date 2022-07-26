@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챗봇1</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 600px;
+            background-color: antiquewhite;
+
+        }
+
+        button {
+            width: 200px;
+            height: 30px;
+        }
+
+        .main * {
+            width: 180px;
+            height: 50px;
+            background-color: skyblue;
+            margin: 10px;
+        }
+
+        .left {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+        }
+
+        .content {
+            width: 50%;
+            height: 80%;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <button>
+        click
+    </button>
+
+    <script>
+        let toggler = true // true: left - false: right
+        let $div = document.querySelectorAll('div')
+        let $divLeft = document.querySelectorAll('.left')
+        let $divRight = document.querySelectorAll('.right')
+        const $mainDiv = document.querySelector('.main')
+
+        const $button = document.querySelector('button')
+
+        const addDiv = () => {
+            if(toggler) {
+                // left
+                $mainDiv.append(document.createElement('div'))
+                $div = document.querySelectorAll('div')
+                $div[$div.length - 1].classList.add('left') // addClass가 아니라 classList.add로 해야함 / addClass는 jQuery
+                $divLeft = document.querySelectorAll('.left')
+                $divLeft[$divLeft.length - 1].append(document.createElement('div'))
+                $div = document.querySelectorAll('div')
+                $div[$div.length - 1].classList.add('content') // addClass가 아니라 classList.add로 해야함
+
+
+                toggler = false
+            } else {
+                // right
+                $mainDiv.append(document.createElement('div'))
+                $div = document.querySelectorAll('div')
+                $div[$div.length - 1].classList.add('right') // addClass가 아니라 classList.add로 해야함
+                $divRight = document.querySelectorAll('.right')
+                $divRight[$divRight.length - 1].append(document.createElement('div'))
+                $div = document.querySelectorAll('div')
+                $div[$div.length - 1].classList.add('content') // addClass가 아니라 classList.add로 해야함
+
+                toggler = true
+            }
+
+        }
+
+        $button.addEventListener('click', addDiv)
+
+    </script>
+</body>
+</html>

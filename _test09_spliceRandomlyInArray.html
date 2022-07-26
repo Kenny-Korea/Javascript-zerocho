@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 [1,2,3] 사이에 4~10 무작위로 집어넣기</title>
+</head>
+<body>
+    <script>
+        let array = [1, 2, 3]
+        for (let i = 4; i <= 10; i++) {
+            array.splice(Math.floor(Math.random() * (array.length + 1)), 0, i)
+        }
+        console.log(array)
+    </script>
+</body>
+</html>

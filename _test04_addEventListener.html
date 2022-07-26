@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 50px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <input type="text">
+    <button>go</button>
+    <div>dd</div>
+
+    <script>
+        let $input = document.querySelector('input')
+        let $button = document.querySelector('button')
+        let $div = document.querySelector('div')
+
+        const print = () => {
+            console.log('hi')
+            $div.textContent = $input.value
+        }
+
+        $button.addEventListener('click', print)
+        
+        let text = $input.value
+
+        
+
+
+
+    </script>
+    
+</body>
+</html>

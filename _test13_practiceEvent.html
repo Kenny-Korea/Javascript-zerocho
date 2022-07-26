@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1></h1>
+    <button class="volumn" onclick="onIncrease()">+1</button>
+    <button class="volumn" onclick="onDecrease()">-1</button>
+
+    <button class="color">red</button>
+    <button class="color">blue</button>
+    <button class="color">green</button>
+
+    <script>
+      const $h1 = document.querySelector("h1");
+      const $volumn = document.querySelectorAll(".volumn");
+      const $color = document.querySelectorAll(".color");
+
+      $h1.textContent = parseInt(0);
+      const onIncrease = () => {
+        // 왜 $h1.textContent += 1 이랑 -= 1 이 차이나는지?
+        // text에 + 하면 text 1이 더해지고 -하면 자동으로 형변환되어 숫자로 인식하는건지?
+        // $h1.textContent += 1
+        $h1.textContent = parseInt($h1.textContent) + 1;
+      };
+      const onDecrease = () => {
+        // $h1.textContent -= 1
+        $h1.textContent = parseInt($h1.textContent) - 1;
+      };
+
+      for (let i = 0; i < 3; i++) {
+        $color[i].addEventListener("click", (e) => {
+          $h1.style.backgroundColor = e.target.textContent;
+        });
+      }
+    </script>
+  </body>
+</html>

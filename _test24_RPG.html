@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPG 만들기</title>
+    <link rel="stylesheet" href="./RPG.css" />
+  </head>
+  <body>
+    <header>
+      header
+      <div id="menuBar">
+        <img src="./images/hamburgerBtn.png" />
+      </div>
+    </header>
+    <main>
+      <aside>
+        aside
+        <div id="asideArea">
+          asideArea
+          <div id="itemInfo"></div>
+          <div id="charInfo">
+            <table>
+              <tr>
+                <td>이름</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>LV</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>HP</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>MP</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>ATT</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>DEF</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>EXP</td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td>MESO</td>
+                <td><span>1</span></td>
+              </tr>
+            </table>
+            <!-- <span id="charInfo_name">dd</span>
+            <span id="charInfo_level"></span>
+            <span id="charInfo_hp"></span>
+            <span id="charInfo_mp"></span>
+            <span id="charInfo_att"></span>
+            <span id="charInfo_def"></span>
+            <span id="charInfo_exp"></span>
+            <span id="charInfo_meso"></span> -->
+          </div>
+          <div id="charItems">
+            <div class="none"></div>
+            <div class="box_helm"></div>
+            <div class="none"></div>
+            <div class="box_weapon"></div>
+            <div class="box_armor_top"></div>
+            <div class="box_shield"></div>
+            <div class="none"></div>
+            <div class="box_armor_bottom"></div>
+            <div class="none"></div>
+          </div>
+        </div>
+      </aside>
+      <div class="screenArea">
+        <div id="screen">
+          <div id="menuList">
+            <ul>
+              <li>무기</li>
+            </ul>
+            <ul>
+              <li>방어구</li>
+            </ul>
+            <ul>
+              <li>퀘스트</li>
+            </ul>
+            <ul>
+              <li>종료</li>
+            </ul>
+          </div>
+          <div id="inventory_weapon">
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+            <div class="none"></div>
+          </div>
+        </div>
+        <div id="messageBox">messageBox</div>
+      </div>
+    </main>
+    <footer>footer</footer>
+  </body>
+  <script>
+    const $box_helm = document.querySelector(".box_helm");
+    const $box_weapon = document.querySelector(".box_weapon");
+    const $box_armor_top = document.querySelector(".box_armor_top");
+    const $box_shield = document.querySelector(".box_shield");
+    const $box_armor_bottom = document.querySelector(".box_armor_bottom");
+    const $menuBar = document.querySelector("#menuBar");
+    let menubarToggle = false;
+    $menuBar.addEventListener("click", () => {
+      const $menuList = document.querySelector("#menuList");
+      menubarToggle === true
+        ? ($menuList.style.visibility = "hidden") && (menubarToggle = false)
+        : ($menuList.style.visibility = "visible") && (menubarToggle = true);
+    });
+
+    class Game {
+      constructor() {}
+    }
+
+    class Unit {
+      constructor(name, maxHp, hp, mp, att, def) {
+        this.name = name;
+        this.maxHp = maxHp;
+        this.hp = hp;
+        this.mp = mp;
+        this.att = att;
+        this.def = def;
+      }
+      attack(target) {
+        target.hp -= this.att;
+      }
+    }
+
+    class Hero extends Unit {
+      constructor(skill) {
+        this.skill = skill;
+        super(name, maxHp, hp, mp, att, def);
+      }
+      attack(target) {
+        super.attack(target);
+      }
+      hasItem() {}
+    }
+
+    class Monster extends Unit {
+      constructor() {
+        super(name, maxHp, hp, mp, att, def);
+      }
+    }
+
+    class Item {
+      constructor(name, img, att, def, price) {
+        this.name = name;
+        this.img = img;
+        this.att = att;
+        this.def = def;
+        this.price = price;
+      }
+    }
+
+    // class Weapon extends Item {
+    //   constructor() {
+    //     super(name, img, att, def, price);
+    //     this.weaponList = [
+    //       {
+    //         name: "Broken Dagger",
+    //         img: "./images/weapon1.png",
+    //         att: 10,
+    //         def: 0,
+    //         price: 50,
+    //       },
+    //     ];
+    //   }
+    // }
+
+    const weaponList = [
+      {
+        name: "Broken Dagger",
+        src: "./images/weapon1.png",
+        att: 10,
+        def: 0,
+        price: 50,
+      },
+    ];
+
+    const toggleEquipment = () => {
+      if ($box_weapon.hasChildNodes()) {
+        $box_weapon.firstChild.remove();
+      }
+    };
+    // 캐릭터 스텟 관리
+    let charName = "";
+    let charLevel = "";
+    let charMaxHp = "";
+    let charHp = "";
+    let charMaxMp = "";
+    let charMp = "";
+    let charAtt = "";
+    let charDef = "";
+    let charMaxExp = "";
+    let charExp = "";
+    let charMeso = "";
+    const inventory = [];
+    const isEquipped = [];
+    $box_weapon.addEventListener("dblclick", toggleEquipment);
+
+    const $span = document.querySelectorAll("span");
+    const $charInfo = document.querySelector("#charInfo");
+
+    const mainMenu = () => {
+      const $messageBox = document.querySelector("#messageBox");
+      $messageBox.textContent =
+        "새로운 게임을 시작하려면 ID생성 후 시작 버튼을 눌러주세요";
+      const addDiv = (target, message) => {
+        const content = document.createElement("div");
+        content.textContent = message;
+        content.className = "clickBtn";
+        console.log(content);
+        target.append(content);
+      };
+      addDiv($messageBox, "1. 시작하기");
+      addDiv($messageBox, "2. 종료하기");
+      let $clickBtn = document.querySelectorAll(".clickBtn");
+
+      $clickBtn[1].addEventListener("click", () => {
+        mainMenu();
+      });
+
+      $clickBtn[0].addEventListener("click", () => {
+        console.log("game start");
+        $clickBtn[0].remove();
+        $clickBtn[1].remove();
+        $messageBox.textContent = "ID를 입력하시고 시작 버튼을 눌러주세요";
+        const inputBox = document.createElement("input");
+        const submitBox = document.createElement("button");
+        $messageBox.append(inputBox);
+        $messageBox.append(submitBox);
+        const $input = document.querySelector("input");
+        const $button = document.querySelector("button");
+        $button.style.width = "40px";
+        $button.style.height = "25px";
+        $button.textContent = "시작";
+
+        $button.addEventListener("click", () => {
+          charName = inputBox.value;
+          charLevel = 1;
+          charMaxHp = 100;
+          charHp = 100;
+          charMaxMp = 30;
+          charMp = 30;
+          charAtt = 10;
+          charDef = 0;
+          charMaxExp = 15;
+          charExp = 0;
+          charMeso = 100;
+          $span[0].textContent = charName;
+          $span[1].textContent = charLevel;
+          $span[2].textContent = `${charHp} / ${charMaxHp}`;
+          $span[3].textContent = `${charMp} / ${charMaxMp}`;
+          $span[4].textContent = charAtt;
+          $span[5].textContent = charDef;
+          $span[6].textContent = `${charExp} / ${charMaxExp}`;
+          $span[7].textContent = charMeso;
+          const test1 = $box_weapon.append(document.createElement("img"));
+          const $img = document.querySelectorAll("img");
+          $img[1].setAttribute("src", weaponList[0].src);
+          console.log(test1);
+          console.log($img);
+          inventory.push(weaponList[0]);
+          isEquipped.push(weaponList[0]);
+          console.log(inventory);
+          console.log(weaponList[0].src);
+        });
+      });
+    };
+
+    mainMenu();
+  </script>
+</html>

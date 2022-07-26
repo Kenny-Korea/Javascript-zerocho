@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        const $div = document.querySelectorAll('div') // querySelectorAll 개념 매우 중요 (해당하는 모든 요소들을 배열로 만듦)
+        // console.log($div[3].textContent) 
+        
+        // 1. 45개의 ball 생성
+        const ball = []
+
+        for (let i = 1; i < 46; i++) {
+            ball.push(i)
+        }
+        console.log(ball)
+
+        // 2. 6개의 숫자 뽑기
+        const numbers = []
+
+        for (let i = 0; i < 6; i++) {
+            let index = Math.floor(Math.random() * ball.length)
+            numbers.push(ball[index])
+            $div[i].textContent = numbers[i]
+            ball.splice(index, 1)
+        }
+
+    </script>
+</body>
+</html>

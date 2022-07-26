@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON</title>
+  </head>
+  <body>
+    <script>
+      // Tip 1. 객체의 메소드로 화살표 함수를 사용할 경우, this가 window 객체로 binding됨
+      //        --> function으로 함수를 선언해야함 ㅠㅠ
+      const kenny = {
+        name: "kwangmin",
+        age: 29,
+        birth: new Date(),
+        programming: function () {
+          console.log(`${this.name}가 프로그래밍을 합니다.`);
+          console.log(this);
+        },
+      };
+
+      const json = JSON.stringify(kenny);
+      console.log(json);
+      const jsonToObject = JSON.parse(json);
+      console.log(jsonToObject.birth);
+
+      const date = new Date();
+      console.log(date.getDate());
+
+      // Tip 2. JSON을 deserialize할 경우, 모든 value를 단순한 String으로 반환하기 때문에
+      //        Date 같은 객체들은 내장 메소드를 사용할 수 없게 됨
+      //        --> JSON.parse에 reviver 인자를 사용하여 별도 형변환 작업을 해주면 됨
+      // let value = JSON.parse(str, [reviver]);
+      const useReviver = JSON.parse(json, function (key, value) {
+        if (key == "birth") return new Date(value);
+        return value;
+      });
+      console.log(useReviver);
+      console.log(kenny.birth.getDate());
+
+      const human = [1, 2, [{ name: "kenny", age: 29 }]];
+      console.log(human[2][0].name); // 'kenny'
+    </script>
+  </body>
+</html>

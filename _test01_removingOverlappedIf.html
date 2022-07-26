@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>if문 줄이기</title>
+  </head>
+
+  <body>
+    <script>
+      // overlapped if 1
+
+      const onClickNumber = (event) => {
+        if (operator) {
+          if (!numTwo) {
+            $result.value = "";
+          }
+          numTwo += event.target.textContent;
+        } else {
+          numOne += event.target.textContent;
+        }
+        $result.value += event.target.textContent;
+      };
+
+      // result of sh shortening 2
+
+      const onClickNumber1 = (event) => {
+        if (!operator) {
+          numOne += event.target.textContent;
+          $result.value += event.target.textContent;
+          return;
+        }
+        if (!numTwo) {
+          $result.value = "";
+        }
+        numTwo += event.target.textContent;
+        $result.value += event.target.textContent;
+      };
+
+      // overlapped if 2
+
+      let a,
+        b,
+        c = "";
+      function test1() {
+        let result = "";
+        if (a) {
+          if (!b) {
+            result = "c";
+          }
+        } else {
+          result = "a";
+        }
+        result += "b";
+        return result;
+      }
+
+      function test3() {
+        let result = "";
+        if (!a) {
+          result = "a";
+          result += "b";
+          return result;
+        }
+        if (!b) {
+          result = "c";
+        }
+        result += "b";
+        return result;
+      }
+
+      // result of sh shortening 2
+
+      function test2() {
+        let result = "";
+        if (!a) {
+          result = "a";
+          result += "b";
+          return result;
+        }
+        if (!b) {
+          result = "c";
+        }
+        result += "b";
+        return result;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>틱택토</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const array = [];
+      const rows = [];
+      const cells = [];
+      let turn = "O";
+      const { body } = document;
+      const $table = document.createElement("table");
+      for (let i = 0; i < 3; i++) {
+        const $tr = document.createElement("tr");
+        for (let j = 0; j < 3; j++) {
+          const $td = document.createElement("td");
+          $td.addEventListener("click", (e) => {
+            if (!e.target.textContent) {
+              if (turn === "O") {
+                e.target.textContent = "O";
+                turn = "X";
+              } else if (turn === "X") {
+                e.target.textContent = "X";
+                turn = "O";
+              }
+            }
+          });
+          $tr.append($td);
+          rows.push($td);
+        }
+        $table.append($tr);
+        array.push(rows);
+      }
+      body.append($table);
+      console.log(array);
+    </script>
+  </body>
+</html>

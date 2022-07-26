@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>이벤트 연습</h1>
+    <input type="text" id="name" placeholder="사용자명">
+    <input type="text" id="nickname" placeholder="아무거나 입력하세요">
+    <form action="">
+        <button>입력</button>
+    </form>
+    <script>
+        const $name = document.querySelector('#name')
+        const $nickname = document.querySelector('#nickname')
+        const $btn = document.querySelector('button')
+
+        const concatNames = () => {
+            alert(`${$name.value}` + ": " + `${$nickname.value}`)
+            $name.value = ''
+            $nickname.value = ''
+        }
+
+        $btn.addEventListener('click', concatNames)
+
+    </script>
+
+</body>
+</html>

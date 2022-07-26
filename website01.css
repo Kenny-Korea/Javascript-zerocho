@@ -1,0 +1,37 @@
+/* header part */
+
+header {
+    width: 1200px;
+    height: 150px;
+    background-color: tomato;
+    display: flex;
+    text-align: center;
+}
+
+ul {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+li {
+    list-style: none;
+    float: left;
+    margin-left: 100px;
+    font-size: 1.25rem;
+}
+
+/* main part */
+
+main {
+    width: 1200px;
+    height: 500px;
+}
+
+/* footer part */
+
+footer {
+    width: 1200px;
+    height: 150px;
+    background-color: lightcoral;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>createElement</title>
+    <style>
+        div {
+            background-color: antiquewhite;
+            width: 100px;
+            height: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 버튼을 누를때마다 번호가 매겨진 새로운 div 생성하는 프로그램 -->
+    <form action="">
+        <button>create</button>
+    </form>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+
+    <script>
+        // form 새로고침 없애기
+        const $form = document.querySelector('form')
+        $form.addEventListener('submit', (event) => {
+            event.preventDefault() })
+
+        // div 추가하는 함수 선언
+        let $div = document.querySelectorAll('div')
+        const $body = document.querySelector('body')
+        const createDiv = () => {
+            $body.append(document.createElement('div'))
+            $div = document.querySelectorAll('div') // 새로운 div를 포함할 수 있도록 $div를 다시 선언해줌
+            $div[$div.length - 1].textContent = $div.length
+        }
+
+        // 버튼 누르면 div 추가하는 함수 호출
+        const $button = document.querySelector('button')
+        $button.addEventListener('click', createDiv)
+
+
+
+    </script>
+</body>
+</html>
